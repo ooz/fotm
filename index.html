@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--<link rel="shortcut icon" type="image/png" href="img/favicon.png" /> -->
+	<title>FotM</title>
+	<style>
+html {
+	/* Disable scrolling */
+	margin: 0;
+	height: 100%;
+	overflow: hidden
+}
+body {
+	font-family: monospace;
+	font-weight: bold;
+	font-size: 18px; /* 18px 32px */
+	line-height: 1.5;
+	color: #74ee15;
+	background: #000;
+	margin: 0;
+	height: 100%;
+	overflow: hidden;
+}
+canvas {
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: crisp-edges;
+}
+a {
+	color: #ffe700;
+}
+#ui {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column-reverse;
+  user-select: none;
+}
+	</style>
+</head>
+<body>
+	<script type="module" src="build/main.js"></script>
+	<noscript>Please activate JavaScript to play this game!</noscript>
+</body>
+</html>
