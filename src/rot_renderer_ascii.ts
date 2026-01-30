@@ -16,9 +16,11 @@ export async function draw(state: State) {
         }
     }
 
-    ROT_DISPLAY.drawText(0, 0, "%c{#ff0}%b{#888}" + state.points)
-
     drawTV(state.tv, ROT_DISPLAY)
+    // TODO: Draw player and actors
+
+    // UI
+    ROT_DISPLAY.drawText(0, 0, "%c{#ff0}%b{#888}" + state.points)
 }
 
 export async function resize() {

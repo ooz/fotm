@@ -1,3 +1,4 @@
+import { Actor } from "./actor";
 import { ROT_OPTIONS } from "./config";
 import { RNG } from "./rng";
 import { TV } from "./tv";
@@ -8,6 +9,8 @@ export interface State {
     rng: RNG,
     tv: TV | null,
     points: number,
+    player: Actor | null,
+    actors: Array<Actor>,
 }
 
 export function states_create(): State {
@@ -16,6 +19,8 @@ export function states_create(): State {
         height: ROT_OPTIONS.height,
         rng: new RNG(),
         tv: null,
-        points: 0
+        points: 0,
+        player: null,
+        actors: []
     }
 }
