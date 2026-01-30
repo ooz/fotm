@@ -1,6 +1,7 @@
 import * as ROT from "../lib/rot.js"
 import { FOTM_OPTIONS, ROT_OPTIONS } from "./config.js"
 import { State } from "./state.js"
+import { TV } from "./tv.js"
 
 export const ROT_DISPLAY = new ROT.Display(ROT_OPTIONS)
 document.body.appendChild(ROT_DISPLAY.getContainer())
@@ -16,8 +17,15 @@ export async function draw(state: State) {
         }
     }
 
-    drawTV(state.tv, ROT_DISPLAY)
-    // TODO: Draw player and actors
+    if (state.tv) {
+        drawTV(state.tv, ROT_DISPLAY)
+    }
+
+    if (state.player) {
+        ROT_DISPLAY.drawOver(state.player.x, state.player.y, state.player.icon, state.player.color, null)
+    }
+
+    // TODO: Draw actors
 
     // UI
     ROT_DISPLAY.drawText(0, 0, "%c{#ff0}%b{#888}" + state.points)
