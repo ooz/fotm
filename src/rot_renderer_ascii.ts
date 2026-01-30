@@ -6,15 +6,23 @@ export const ROT_DISPLAY = new ROT.Display(ROT_OPTIONS)
 document.body.appendChild(ROT_DISPLAY.getContainer())
 
 export async function draw(state: State) {
-    for (let y=0; y < ROT_OPTIONS.height; y++) {
-        for (let x=0; x < ROT_OPTIONS.width; x++) {
-            ROT_DISPLAY.drawText(x,  y, "#", "#0f0");
+    console.log(`Width: ${state.width}, height: ${state.height}`)
+    ROT_DISPLAY.clear()
+    for (let y=0; y < state.height; y++) {
+        for (let x=0; x < state.width; x++) {
+            if (x === 0 || y === 0 || x === state.width - 1 || y === state.height - 1) {
+                ROT_DISPLAY.drawOver(x, y, "#", "#888", "#888")
+            }
         }
     }
+
+    ROT_DISPLAY.drawText(0, 0, "%c{#ff0}%b{#888}" + state.points)
+
+    drawTV(state.tv, ROT_DISPLAY)
 }
 
 export async function resize() {
-    ROT_DISPLAY._backend.setOptions(ROT_OPTIONS) // Trigger tile-gl backend's _updateSize method
+    ROT_DISPLAY.setOptions(ROT_OPTIONS) // Trigger tile-gl backend's _updateSize method
 }
 
 export function updateDisplayOptions(windowWidth: number, windowHeight: number) {
@@ -22,4 +30,16 @@ export function updateDisplayOptions(windowWidth: number, windowHeight: number) 
     FOTM_OPTIONS.cameraHeight = Math.floor(windowHeight / FOTM_OPTIONS.fontSize)
     ROT_OPTIONS.width = Math.floor(FOTM_OPTIONS.cameraWidth * (1 / FOTM_OPTIONS.zoom))
     ROT_OPTIONS.height = Math.floor(FOTM_OPTIONS.cameraHeight * (1 / FOTM_OPTIONS.zoom))
+}
+
+function drawTV(tv: TV, display: any) {
+    for (let y=tv.y; y < tv.y + tv.height; y++) {
+        for (let x=tv.x; x < tv.x + tv.width; x++) {
+            if (x === tv.x || y === tv.y || x === tv.x + tv.width - 1 || y === tv.y + tv.height - 1) {
+                display.drawOver(x,  y, "#", "#aaa", "#aaa");
+            } else {
+                display.drawOver(x,  y, "#", "#0f0", "#0f0");
+            }
+        }
+    }
 }

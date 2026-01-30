@@ -1,4 +1,7 @@
+import { ROT_OPTIONS } from "./config";
+import { createMap } from "./map";
 import { State, states_create } from "./state";
+import { createTV } from "./tv";
 
 export default class Game {
     state: State;
@@ -8,6 +11,8 @@ export default class Game {
 
     init(): State {
         this.state = states_create()
+        this.state = createMap(this.state)
+        this.state = createTV(this.state)
 
         return this.state
     }

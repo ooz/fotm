@@ -11,8 +11,13 @@ GGJ2026 Theme "Mask". Covered [diversifiers](https://globalgamejam.org/global-ga
 
 Possible TV messages:
 
-* Be edgy! | Be yourself! | Be hip!
-* Fade in the mainstream! | Strength in unity! |
-* FOTM is nuclear (green)
-* FOTM is blood (red)
-* FOTM is water (blue)
+* Be edgy! | Be yourself! | Be hip! --> Colors and characters with <10% occurence, gain points
+* Fade in the mainstream! | Strength in unity! --> Colors and characters with >80% occurence, gain points
+* We ❤️ Emojis! --> emoji characters gain points
+* FotM is nuclear (green) --> green color and nuclear emojis gain points
+* FotM is nature (green) --> green color and organic emojis gain points
+* FotM is love (red)
+* FotM is water (blue)
+* FotM is number
+* FotM is letter
+* FotM is symbol

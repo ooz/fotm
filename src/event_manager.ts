@@ -13,7 +13,7 @@ export function initializeEvents(game: Game) {
 
         updateDisplayOptions(WINDOW_WIDTH_IN_PX, WINDOW_HEIGHT_IN_PX)
         await resize()
-        draw(game.state)
+        draw(game.init())
     }
 
     /*
