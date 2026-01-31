@@ -52,4 +52,8 @@ function drawTV(tv: TV, display: any) {
             }
         }
     }
+
+    if (tv.message) {
+        display.drawText(tv.x + 1, tv.y + 3, "%c{#000}%b{#0f0}" + tv.message, 12)
+    }
 }

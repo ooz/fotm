@@ -10,7 +10,8 @@ export interface State {
     tv: TV | null,
     points: number,
     player: Actor | null,
-    actors: Array<Actor>,
+    actors: object,
+    positionToActorId: object,
 }
 
 export function states_create(): State {
@@ -21,6 +22,7 @@ export function states_create(): State {
         tv: null,
         points: 0,
         player: null,
-        actors: []
+        actors: {},
+        positionToActorId: {},
     }
 }

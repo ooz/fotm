@@ -23,10 +23,14 @@ export function createTV(state: State): State {
         y: MAP_PADDING + state.rng.getUniform() * (state.height - 2 * MAP_PADDING - tvHeight),
         width: tvWidth,
         height: tvHeight,
-        message: ""
+        message: "FotM! Press any key to start!"
     }
 
     return state
+}
+
+export function tvAreaSize(): number {
+    return (TV_SCREEN_WIDTH + TV_BORDER) * (TV_SCREEN_HEIGHT + TV_BORDER)
 }
 
 export enum TV_MESSAGE {
