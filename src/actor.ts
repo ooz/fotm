@@ -7,7 +7,8 @@ export interface Actor {
     x: number,
     y: number,
     icon: string,
-    color: string
+    color: string,
+    points: number,
 }
 
 export function getFreePosition(state: State): Array<number> {
@@ -41,7 +42,8 @@ export function createPlayer(state: State): State {
         x: x,
         y: y,
         icon: "@",
-        color: "#fff"
+        color: "#fff",
+        points: 0,
     }
     return state
 }
@@ -67,7 +69,8 @@ export function createActors(state: State): State {
                 x: x,
                 y: y,
                 icon: "A",
-                color: "#f00"
+                color: "#f00",
+                points: 0
             };
             actorId++;
         }
@@ -129,48 +132,6 @@ export function entityInteractOrMove(state: State, actorId: string, dx: number, 
             }
         }
     }
-
-    /**
-    const position = _get_position(state, entityId);
-    const map = state.maps[position.mapId]
-    const entitiesAtTargetPosition = entities_get_at(state, {mapId: map.id, x: position.x + dx, y: position.y + dy})
-    const entity_at_target_position = entities_find_first_colliding(state, entitiesAtTargetPosition)
-    const inventory: InventoryComponent | undefined = state.components.inventory[entityId]
-
-    if (!!entity_at_target_position) {
-        if (isMoveableObject(state, entity_at_target_position)) {
-            if (!isMoveableObject(state, entityId) && recursion < 1) { // Boulder/box doesn't move another boulder/box
-                state = entityInteractOrMove(state, entity_at_target_position, dx, dy, recursion++)
-                state = entityInteractOrMove(state, entityId, dx, dy, recursion++)
-            }
-        } else {
-            // Friend or foe
-            state = interactOrCombat(state, entityId, entity_at_target_position)
-        }
-
-    } else if (_entity_can_move(state, map, entityId, dx, dy)) {
-        state = _entity_move(state, map, entityId, dx, dy)
-        state._energyQueue.push({entityId: entityId, energyDelta: -1 * recursion}) // Pushing rocks
-
-    } else if (_entity_can_crush_tile(state, map, entityId, dx, dy)) {
-        const oldTile = map.setTile(position.x + dx, position.y + dy, MANIFEST.tiles.void)
-        const newPosition: PositionComponent = { mapId: map.id, x: position.x + dx, y: position.y + dy };
-        if (oldTile.type === MANIFEST.tiles.rock) {
-            const lootChance = state.rng.getPercentage()
-            if (lootChance <= 1) {
-                state = items_create(state, MANIFEST.items.matter, newPosition)
-            } else if (lootChance <= 34) {
-                state = items_create(state, MANIFEST.items.junk, newPosition)
-            }
-        }
-        state._energyQueue.push({entityId: entityId, energyDelta: _toolEnergyCost(state, entityId, inventory?.tool)})
-
-    } else if (_entity_can_open_tile(state, map, entityId, dx, dy)) { // E.g. open sewer portals
-        state = _entity_move(state, map, entityId, dx, dy)
-        state._energyQueue.push({entityId: entityId, energyDelta: _toolEnergyCost(state, entityId, inventory?.tool)}) // Wrenching cost
-
-    }
-    */
 
     return state
 }

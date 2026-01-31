@@ -46,7 +46,9 @@ export async function draw(state: State) {
     }
 
     // UI
-    ROT_DISPLAY.drawText(0, 0, "%c{#ff0}%b{#888}" + state.points)
+    if (state.player) {
+        ROT_DISPLAY.drawText(0, 0, "%c{#ff0}%b{#888}" + state.player.points)
+    }
 }
 
 export async function resize() {
