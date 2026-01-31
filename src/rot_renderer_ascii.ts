@@ -7,7 +7,6 @@ export const ROT_DISPLAY = new ROT.Display(ROT_OPTIONS)
 document.body.appendChild(ROT_DISPLAY.getContainer())
 
 export async function draw(state: State) {
-    console.log(`Width: ${state.width}, height: ${state.height}`)
     ROT_DISPLAY.clear()
     for (let y=0; y < state.height; y++) {
         for (let x=0; x < state.width; x++) {

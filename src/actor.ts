@@ -54,7 +54,6 @@ export function createActors(state: State): State {
 
     const availableMapSize = (state.width - MAP_PADDING) * (state.height - MAP_PADDING) - tvAreaSize() - 1
     const numberOfActorsToCreate = Math.floor(availableMapSize / 20)
-    console.log(`Spawning ${numberOfActorsToCreate} actors.`)
 
     positionToActorId[`${""+state.player?.x},${""+state.player?.y}`] = state.player?.id;
 
@@ -62,14 +61,13 @@ export function createActors(state: State): State {
     while (Object.keys(positionToActorId).length < numberOfActorsToCreate + 1) {
         let [x, y] = getFreePosition(state)
         if (!Object.hasOwn(positionToActorId, `${""+x},${""+y}`)) {
-            console.log("Creating actor " + actorId)
             positionToActorId[`${""+x},${""+y}`] = actorId.toString();
             actors[actorId.toString()] = {
                 id: actorId.toString(),
                 x: x,
                 y: y,
-                icon: "A",
-                color: "#f00",
+                icon: "?",
+                color: "#888",
                 points: 0
             };
             actorId++;

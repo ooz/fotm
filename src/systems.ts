@@ -71,7 +71,7 @@ function updatePoints(state: State): State {
     const emojis = ["🫠", "👾", "🤘", "🥷", "🦉", "🐸", "🐢", "🌲", "🍩", "🚀", "🥋", "🎭", "💰", "☢️"];
     const nature = ["🦉", "🐸", "🐢", "🌲"];
     const nuclear = ["☢️"];
-    const symbols = ["!", "#", "$", "%", "="];
+    const symbols = ["!", "#", "$", "%", "=", "?"];
 
     for (const actor of allActors) {
         let points = 0;
@@ -90,7 +90,7 @@ function updatePoints(state: State): State {
                 if (symbols.includes(actor.icon)) points = 1; else points = -1;
                 break;
             case TV_MESSAGE.COLOR:
-                if (actor.color !== "#fff") points = 1; else points = -1;
+                if (actor.color !== "#fff" && actor.color !== "#888") points = 1; else points = -1;
                 break;
             case TV_MESSAGE.LOVE:
                 if (actor.color === "#f00" || actor.icon === "❤️") points = 1; else points = -1;

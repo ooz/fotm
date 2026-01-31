@@ -3,7 +3,7 @@ import { createItems } from "./item";
 import { createMap } from "./map";
 import { State, states_create } from "./state";
 import { updateSystemsPerTurn } from "./systems";
-import { createTV } from "./tv";
+import { createTV, GAME_OVER_MESSAGE, WIN_MESSAGE } from "./tv";
 
 export default class Game {
     state: State;
@@ -29,7 +29,9 @@ export default class Game {
         if (playerExists) {
             if (!!action) {
                 this.state = act(this.state, playerId, action)
-                this.state = updateSystemsPerTurn(this.state)
+                if (this.state.tv?.messageStr !== WIN_MESSAGE && this.state.tv?.messageStr !== GAME_OVER_MESSAGE) {
+                    this.state = updateSystemsPerTurn(this.state)
+                }
             }
         }
 

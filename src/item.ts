@@ -52,8 +52,6 @@ export function createItems(state: State): State {
         }
     }
 
-    console.log("Item count: " + Object.keys(state.positionToItem).length)
-
     return state;
 }
 
