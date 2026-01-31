@@ -147,31 +147,31 @@ document.body.addEventListener("click", function(e) {
     const heightThird = height / 3;
 
     if (x >= widthThird && x < 2 * widthThird && y < heightThird) {
-        _triggerCallback(MANIFEST.commands.N)
+        _triggerCallback("N")
         _preventDefaultAndStopPropagation(e);
 
     } else if (x < widthThird && y < heightThird) {
-        _triggerCallback(MANIFEST.commands.B)
+        _triggerCallback("B")
         _preventDefaultAndStopPropagation(e);
 
     } else if (x >= 2 * widthThird && y < heightThird) {
-        _triggerCallback(MANIFEST.commands.A)
+        _triggerCallback("A")
         _preventDefaultAndStopPropagation(e);
 
     } else if (x < widthThird && y >= heightThird && y < 2 * heightThird) {
-        _triggerCallback(MANIFEST.commands.W)
+        _triggerCallback("W")
         _preventDefaultAndStopPropagation(e);
 
     } else if (x >= 2 * widthThird && y >= heightThird && y < 2 * heightThird) {
-        _triggerCallback(MANIFEST.commands.E)
+        _triggerCallback("E")
         _preventDefaultAndStopPropagation(e);
 
     } else if (x >= widthThird && x < 2 * widthThird && y >= 2 * heightThird) {
-        _triggerCallback(MANIFEST.commands.S)
+        _triggerCallback("S")
         _preventDefaultAndStopPropagation(e);
 
     } else if (x >= widthThird && x < 2 * widthThird && y >= heightThird && y < 2 * heightThird) {
-        _triggerCallback(MANIFEST.commands.M)
+        _triggerCallback("M")
         _preventDefaultAndStopPropagation(e);
     }
 });
@@ -247,6 +247,7 @@ function _get_action(): string | null {
     return action;
 }
 
+/*
 document.body.addEventListener("mousemove", function(e) {
     if (e.defaultPrevented) {
         return; // Do nothing if event already handled
@@ -257,6 +258,7 @@ document.body.addEventListener("mousemove", function(e) {
         _preventDefaultAndStopPropagation(e)
     }
 })
+*/
 
 /**
  * Gamepad controls

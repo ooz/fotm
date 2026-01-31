@@ -10,8 +10,8 @@ export interface State {
     tv: TV | null,
     points: number,
     player: Actor | null,
-    actors: object,
-    positionToActorId: object,
+    actors: { [actorId: string]: Actor },
+    positionToActorId: { [positionKey: string]: string },
 }
 
 export function states_create(): State {

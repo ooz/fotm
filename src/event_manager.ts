@@ -19,8 +19,8 @@ export function initializeEvents(game: Game) {
     onKeyDown(function(action) {
         draw(game.update(action));
     })
-    /*
 
+    /*
     onMouseMove(drawTooltip)
     */
 
