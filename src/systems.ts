@@ -2,11 +2,108 @@ import { ItemType, itemTypeToItem } from "./item";
 import { State } from "./state";
 import { messageToString, TV_MESSAGE, GAME_OVER_MESSAGE, WIN_MESSAGE } from "./tv";
 
+const EMOJIS = ["🫠", "👾", "🤘", "🥷", "🦉", "🐸", "🐢", "🌲", "🍩", "🚀", "🥋", "🎭", "💰", "☢️", "❤️"];
+const NATURE = ["🦉", "🐸", "🐢", "🌲"];
+const NUCLEAR = ["☢️"];
+const SYMBOLS = ["!", "#", "$", "%", "=", "?"];
+const LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+const NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const COLORS = ["#fff", "#f00", "#0f0", "#00f", "#ff0", "#f0f", "#0ff", "#888"];
+const COLORFUL = ["#f00", "#0f0", "#00f", "#ff0", "#f0f", "#0ff"];
+
 export function updateSystemsPerTurn(state: State): State {
     state = updateTvMessage(state)
     state = updateItems(state)
     state = updatePoints(state)
     state = updateActorLives(state)
+    state = updateActorsFashion(state)
+
+    return state;
+}
+
+function updateActorsFashion(state: State): State {
+    if (!state.tv || state.tv.message === null) return state;
+
+    const theme = state.tv.message;
+    const actors = Object.values(state.actors);
+
+    // Calculate common attributes for Mainstream
+    let mostCommonIcon = "?";
+    let mostCommonColor = "#fff";
+
+    if (theme === TV_MESSAGE.MAINSTREAM) {
+        const iconCounts: Record<string, number> = {};
+        const colorCounts: Record<string, number> = {};
+        for (const actor of actors) {
+            iconCounts[actor.icon] = (iconCounts[actor.icon] || 0) + 1;
+            colorCounts[actor.color] = (colorCounts[actor.color] || 0) + 1;
+        }
+
+        if (actors.length > 0) {
+            mostCommonIcon = Object.keys(iconCounts).reduce((a, b) => iconCounts[a] > iconCounts[b] ? a : b);
+            mostCommonColor = Object.keys(colorCounts).reduce((a, b) => colorCounts[a] > colorCounts[b] ? a : b);
+        }
+    }
+
+    for (const actor of actors) {
+        // Update ~5% of actors per turn
+        if (state.rng.getUniform() > 0.05) continue;
+
+        // 20% chance to pick the "wrong" fashion (something random)
+        if (state.rng.getUniform() < 0.2) {
+            const allIcons = [...EMOJIS, ...LETTERS, ...NUMBERS, ...SYMBOLS];
+            if (state.rng.getUniform() > 0.5) {
+                actor.icon = state.rng.getItem(allIcons);
+            } else {
+                actor.color = state.rng.getItem(COLORS);
+            }
+            continue;
+        }
+
+        switch (theme) {
+            case TV_MESSAGE.EMOJIS:
+                actor.icon = state.rng.getItem(EMOJIS);
+                break;
+            case TV_MESSAGE.LETTER:
+                actor.icon = state.rng.getItem(LETTERS);
+                break;
+            case TV_MESSAGE.NUMBER:
+                actor.icon = state.rng.getItem(NUMBERS);
+                break;
+            case TV_MESSAGE.SYMBOL:
+                actor.icon = state.rng.getItem(SYMBOLS);
+                break;
+            case TV_MESSAGE.COLOR:
+                actor.color = state.rng.getItem(COLORFUL);
+                break;
+            case TV_MESSAGE.LOVE:
+                if (state.rng.getUniform() > 0.5) {
+                    actor.icon = "❤️";
+                } else {
+                    actor.color = "#f00";
+                }
+                break;
+            case TV_MESSAGE.NATURE:
+                actor.icon = state.rng.getItem(NATURE);
+                break;
+            case TV_MESSAGE.NUCLEAR:
+                actor.icon = state.rng.getItem(NUCLEAR);
+                break;
+            case TV_MESSAGE.EDGY:
+                // Pick random properties to create noise/variety
+                 const allIcons = [...EMOJIS, ...LETTERS, ...NUMBERS, ...SYMBOLS];
+                 actor.icon = state.rng.getItem(allIcons);
+                 actor.color = state.rng.getItem(COLORS);
+                break;
+            case TV_MESSAGE.MAINSTREAM:
+                if (state.rng.getUniform() > 0.5) {
+                    actor.icon = mostCommonIcon;
+                } else {
+                    actor.color = mostCommonColor;
+                }
+                break;
+        }
+    }
 
     return state;
 }
@@ -37,7 +134,7 @@ function updateItems(state: State): State {
             state.positionToItem[posKey] = itemTypeToItem(state, itemType)
         }
 
-        itemUpdateCounter = state.rng.getItem([18, 20, 22])
+        itemUpdateCounter = state.rng.getItem([15, state.width, state.height, state.width + state.height])
     }
 
     itemUpdateCounter--;
@@ -68,17 +165,12 @@ function updatePoints(state: State): State {
         }
     }
 
-    const emojis = ["🫠", "👾", "🤘", "🥷", "🦉", "🐸", "🐢", "🌲", "🍩", "🚀", "🥋", "🎭", "💰", "☢️"];
-    const nature = ["🦉", "🐸", "🐢", "🌲"];
-    const nuclear = ["☢️"];
-    const symbols = ["!", "#", "$", "%", "=", "?"];
-
     for (const actor of allActors) {
         let points = 0;
 
         switch (theme) {
             case TV_MESSAGE.EMOJIS:
-                if (emojis.includes(actor.icon)) points = 1; else points = -1;
+                if (EMOJIS.includes(actor.icon)) points = 1; else points = -1;
                 break;
             case TV_MESSAGE.LETTER:
                 if (/^[A-Z]$/.test(actor.icon)) points = 1; else points = -1;
@@ -87,7 +179,7 @@ function updatePoints(state: State): State {
                 if (/^[0-9]$/.test(actor.icon)) points = 1; else points = -1;
                 break;
             case TV_MESSAGE.SYMBOL:
-                if (symbols.includes(actor.icon)) points = 1; else points = -1;
+                if (SYMBOLS.includes(actor.icon)) points = 1; else points = -1;
                 break;
             case TV_MESSAGE.COLOR:
                 if (actor.color !== "#fff" && actor.color !== "#888") points = 1; else points = -1;
@@ -96,10 +188,10 @@ function updatePoints(state: State): State {
                 if (actor.color === "#f00" || actor.icon === "❤️") points = 1; else points = -1;
                 break;
             case TV_MESSAGE.NATURE:
-                if (nature.includes(actor.icon)) points = 1; else points = -1;
+                if (NATURE.includes(actor.icon)) points = 1; else points = -1;
                 break;
             case TV_MESSAGE.NUCLEAR:
-                if (nuclear.includes(actor.icon)) points = 1; else points = -1;
+                if (NUCLEAR.includes(actor.icon)) points = 1; else points = -1;
                 break;
             case TV_MESSAGE.EDGY:
                 if ((iconCounts[actor.icon] || 0) / total < 0.10) points = 1; else points = -1;
@@ -150,6 +242,8 @@ function updateActorLives(state: State): State {
             state.tv.messageStr = WIN_MESSAGE;
         }
     }
+
+    console.log("Actors: " + Object.keys(state.actors).length)
 
     return state;
 }

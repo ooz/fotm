@@ -55,7 +55,7 @@ export enum TV_MESSAGE {
 export function messageToString(state: State, msg: TV_MESSAGE): string {
     switch (msg) {
         case TV_MESSAGE.EDGY:
-            return state.rng.getItem(["Be edgy!", "Be yourself!", "Be hip!"])
+            return state.rng.getItem(["Be edgy!", "Be yourself", "Be hip!"])
         case TV_MESSAGE.MAINSTREAM:
             return state.rng.getItem(["Fade in the mainstream!", "Strength in unity!"])
         case TV_MESSAGE.EMOJIS:
@@ -73,7 +73,7 @@ export function messageToString(state: State, msg: TV_MESSAGE): string {
         case TV_MESSAGE.SYMBOL:
             return state.rng.getItem(["FotM is symbol!"])
         case TV_MESSAGE.COLOR:
-            return state.rng.getItem(["FotM is color!", "Show your true colors!"])
+            return state.rng.getItem(["FotM is color!", "Show your true colors"])
         default:
             return DEFAULT_MESSAGE
     }
