@@ -30,7 +30,7 @@ function updateItems(state: State): State {
     if (itemUpdateCounter <= 0 && state.positionToItem) {
         for (const [posKey, item] of Object.entries(state.positionToItem)) {
             const [x, y] = posKey.split(",").map(Number)
-            const itemType = state.rng.getItem([ItemType.EMOJI, ItemType.LETTER, ItemType.NUMBER, ItemType.NUMBER, ItemType.COLOR])
+            const itemType = state.rng.getItem([ItemType.EMOJI, ItemType.LETTER, ItemType.NUMBER, ItemType.SYMBOL, ItemType.COLOR])
 
             state.positionToItem[posKey] = itemTypeToItem(state, itemType)
         }

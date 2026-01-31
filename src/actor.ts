@@ -116,6 +116,18 @@ export function entityInteractOrMove(state: State, actorId: string, dx: number, 
         state.positionToActorId[targetPositionKey] = actor.id
         actor.x = targetX
         actor.y = targetY
+
+        if (Object.hasOwn(state.positionToItem, targetPositionKey)) {
+            const item = state.positionToItem[targetPositionKey]
+            if (item) {
+                if (item.icon === "") {
+                    actor.color = item.color
+                } else {
+                    actor.icon = item.icon
+                }
+                state.positionToItem[targetPositionKey] = null
+            }
+        }
     }
 
     /**

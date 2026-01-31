@@ -13,7 +13,7 @@ export interface State {
     player: Actor | null,
     actors: { [actorId: string]: Actor },
     positionToActorId: { [positionKey: string]: string },
-    positionToItem: { [positionKey: string]: Item },
+    positionToItem: { [positionKey: string]: Item | null },
 }
 
 export function states_create(): State {

@@ -24,7 +24,14 @@ export async function draw(state: State) {
     if (state.positionToItem) {
         for (const [posKey, item] of Object.entries(state.positionToItem)) {
             const [x, y] = posKey.split(",").map(Number)
-            ROT_DISPLAY.drawOver(x, y, item.icon, item.color, null)
+            if (item) {
+                if (item.icon === "") {
+                    // Solid color
+                    ROT_DISPLAY.drawOver(x, y, "#", item.color, item.color)
+                } else {
+                    ROT_DISPLAY.drawOver(x, y, item.icon, item.color, null)
+                }
+            }
         }
     }
 
