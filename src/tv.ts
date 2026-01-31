@@ -7,6 +7,8 @@ const TV_SCREEN_HEIGHT = 8
 const TV_BORDER = 1
 
 const DEFAULT_MESSAGE = "FotM! Press any key to start!"
+export const GAME_OVER_MESSAGE = "GAME OVER!"
+export const WIN_MESSAGE = "YOU WIN!"
 
 export interface TV {
     x: number,

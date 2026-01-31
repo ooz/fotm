@@ -25,7 +25,7 @@ export default class Game {
 
     update(action: string): State {
         const playerId = "player"
-        const playerExists = true; //!!this.state.entities[playerId]
+        const playerExists = !!this.state.player; //!!this.state.entities[playerId]
         if (playerExists) {
             if (!!action) {
                 this.state = act(this.state, playerId, action)

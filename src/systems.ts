@@ -1,11 +1,12 @@
 import { ItemType, itemTypeToItem } from "./item";
 import { State } from "./state";
-import { messageToString, TV_MESSAGE } from "./tv";
+import { messageToString, TV_MESSAGE, GAME_OVER_MESSAGE, WIN_MESSAGE } from "./tv";
 
 export function updateSystemsPerTurn(state: State): State {
     state = updateTvMessage(state)
     state = updateItems(state)
     state = updatePoints(state)
+    state = updateActorLives(state)
 
     return state;
 }
@@ -111,6 +112,43 @@ function updatePoints(state: State): State {
         }
 
         actor.points += points;
+    }
+
+    return state;
+}
+
+function updateActorLives(state: State): State {
+    const actorsToRemove: string[] = [];
+
+    for (const actorId in state.actors) {
+        const actor = state.actors[actorId];
+        if (actor.points <= -100) {
+            actorsToRemove.push(actorId);
+        }
+    }
+
+    for (const actorId of actorsToRemove) {
+        const actor = state.actors[actorId];
+        const posKey = `${actor.x},${actor.y}`;
+        if (state.positionToActorId[posKey] === actorId) {
+            delete state.positionToActorId[posKey];
+        }
+        delete state.actors[actorId];
+    }
+
+    if (state.player && state.player.points <= -100) {
+        const posKey = `${state.player.x},${state.player.y}`;
+        if (state.positionToActorId[posKey] === state.player.id) {
+            delete state.positionToActorId[posKey];
+        }
+        state.player = null;
+        if (state.tv) {
+            state.tv.messageStr = GAME_OVER_MESSAGE;
+        }
+    } else if (state.player && Object.keys(state.actors).length === 0) {
+        if (state.tv) {
+            state.tv.messageStr = WIN_MESSAGE;
+        }
     }
 
     return state;
