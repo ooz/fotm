@@ -21,14 +21,21 @@ export async function draw(state: State) {
         drawTV(state.tv, ROT_DISPLAY)
     }
 
-    if (state.player) {
-        ROT_DISPLAY.drawOver(state.player.x, state.player.y, state.player.icon, state.player.color, null)
+    if (state.positionToItem) {
+        for (const [posKey, item] of Object.entries(state.positionToItem)) {
+            const [x, y] = posKey.split(",").map(Number)
+            ROT_DISPLAY.drawOver(x, y, item.icon, item.color, null)
+        }
     }
 
     if (state.actors) {
         for (const actor of Object.values(state.actors) as any[]) {
             ROT_DISPLAY.drawOver(actor.x, actor.y, actor.icon, actor.color, null)
         }
+    }
+
+    if (state.player) {
+        ROT_DISPLAY.drawOver(state.player.x, state.player.y, state.player.icon, state.player.color, null)
     }
 
     // UI
@@ -57,7 +64,7 @@ function drawTV(tv: TV, display: any) {
         }
     }
 
-    if (tv.message) {
-        display.drawText(tv.x + 1, tv.y + 3, "%c{#000}%b{#0f0}" + tv.message, 12)
+    if (tv.messageStr) {
+        display.drawText(tv.x + 1, tv.y + 3, "%c{#000}%b{#0f0}" + tv.messageStr, 12)
     }
 }

@@ -1,5 +1,6 @@
 import { Actor } from "./actor";
 import { ROT_OPTIONS } from "./config";
+import { Item } from "./item";
 import { RNG } from "./rng";
 import { TV } from "./tv";
 
@@ -12,6 +13,7 @@ export interface State {
     player: Actor | null,
     actors: { [actorId: string]: Actor },
     positionToActorId: { [positionKey: string]: string },
+    positionToItem: { [positionKey: string]: Item },
 }
 
 export function states_create(): State {
@@ -24,5 +26,6 @@ export function states_create(): State {
         player: null,
         actors: {},
         positionToActorId: {},
+        positionToItem: {},
     }
 }

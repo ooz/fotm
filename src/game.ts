@@ -1,6 +1,8 @@
 import { act, createActors, createPlayer } from "./actor";
+import { createItems } from "./item";
 import { createMap } from "./map";
 import { State, states_create } from "./state";
+import { updateSystemsPerTurn } from "./systems";
 import { createTV } from "./tv";
 
 export default class Game {
@@ -16,6 +18,7 @@ export default class Game {
         this.state = createTV(this.state)
         this.state = createPlayer(this.state)
         this.state = createActors(this.state)
+        this.state = createItems(this.state)
 
         return this.state
     }
@@ -26,6 +29,7 @@ export default class Game {
         if (playerExists) {
             if (!!action) {
                 this.state = act(this.state, playerId, action)
+                this.state = updateSystemsPerTurn(this.state)
             }
         }
 
