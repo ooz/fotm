@@ -1,5 +1,5 @@
 import Game from "./game";
-//import { onKeyDown, onMouseMove } from "./input";
+import { onKeyDown, } from "./input";
 import { draw, resize, updateDisplayOptions } from "./rot_renderer_ascii";
 
 export function initializeEvents(game: Game) {
@@ -16,10 +16,10 @@ export function initializeEvents(game: Game) {
         draw(game.init())
     }
 
-    /*
     onKeyDown(function(action) {
         draw(game.update(action));
     })
+    /*
 
     onMouseMove(drawTooltip)
     */

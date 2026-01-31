@@ -1,4 +1,4 @@
-import { createActors, createPlayer } from "./actor";
+import { act, createActors, createPlayer } from "./actor";
 import { createMap } from "./map";
 import { State, states_create } from "./state";
 import { createTV } from "./tv";
@@ -21,6 +21,14 @@ export default class Game {
     }
 
     update(action: string): State {
+        const playerId = "player"
+        const playerExists = true; //!!this.state.entities[playerId]
+        if (playerExists) {
+            if (!!action) {
+                this.state = act(this.state, playerId, action)
+            }
+        }
+
         return this.state
     }
 

@@ -25,7 +25,11 @@ export async function draw(state: State) {
         ROT_DISPLAY.drawOver(state.player.x, state.player.y, state.player.icon, state.player.color, null)
     }
 
-    // TODO: Draw actors
+    if (state.actors) {
+        for (const actor of Object.values(state.actors) as any[]) {
+            ROT_DISPLAY.drawOver(actor.x, actor.y, actor.icon, actor.color, null)
+        }
+    }
 
     // UI
     ROT_DISPLAY.drawText(0, 0, "%c{#ff0}%b{#888}" + state.points)
