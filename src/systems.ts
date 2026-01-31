@@ -5,6 +5,7 @@ import { messageToString, TV_MESSAGE } from "./tv";
 export function updateSystemsPerTurn(state: State): State {
     state = updateTvMessage(state)
     state = updateItems(state)
+    state = updatePoints(state)
 
     return state;
 }
@@ -41,5 +42,9 @@ function updateItems(state: State): State {
     itemUpdateCounter--;
 
     return state
+}
+
+function updatePoints(state: State): State {
+    return state;
 }
 
