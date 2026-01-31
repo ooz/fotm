@@ -46,7 +46,8 @@ export enum TV_MESSAGE {
     LOVE,
     NUMBER,
     LETTER,
-    SYMBOL
+    SYMBOL,
+    COLOR
 }
 
 export function messageToString(state: State, msg: TV_MESSAGE): string {
@@ -69,6 +70,8 @@ export function messageToString(state: State, msg: TV_MESSAGE): string {
             return state.rng.getItem(["FotM is letter!"])
         case TV_MESSAGE.SYMBOL:
             return state.rng.getItem(["FotM is symbol!"])
+        case TV_MESSAGE.COLOR:
+            return state.rng.getItem(["FotM is color!", "Show your true colors!"])
         default:
             return DEFAULT_MESSAGE
     }

@@ -61,7 +61,7 @@ export function itemTypeToItem(state: State, type: ItemType): Item {
     switch (type) {
         case ItemType.EMOJI:
             return {
-                icon: state.rng.getItem(["🫠", "👾", "🤘", "🥷", "🦉", "🐸", "🐢", "🌲", "🍩", "🚀", "🥋", "🎭", "💰", "☢️"]),
+                icon: state.rng.getItem(["🫠", "👾", "🤘", "🥷", "🦉", "🐸", "🐢", "🌲", "🍩", "🚀", "🥋", "🎭", "💰", "☢️", "❤️"]),
                 color: "#fff",
                 type: ItemType.EMOJI
             }
@@ -86,7 +86,7 @@ export function itemTypeToItem(state: State, type: ItemType): Item {
         case ItemType.COLOR:
             return {
                 icon: "",
-                color: state.rng.getItem(["#f00", "#0f0", "#00f", "#ff0", "#f0f", "#0ff"]),
+                color: state.rng.getItem(["#fff", "#f00", "#0f0", "#00f", "#ff0", "#f0f", "#0ff"]),
                 type: ItemType.COLOR
             }
         default:
