@@ -1,4 +1,4 @@
-# Flavor of the Month
+# [Flavor of the Month](https://oliz.io/fotm/)
 
 *Follow the TV-induced flavor of the month or perish*
 
