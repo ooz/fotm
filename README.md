@@ -23,7 +23,9 @@ GGJ2026 Theme "Mask". Covered [diversifiers](https://globalgamejam.org/global-ga
 ![You win!](screenshots/win.png)
 ![Game over!](screenshots/game_over.png)
 
-## Creators
+## Credits
 
 * Oliver "oz" Z.
 * `gemini-cli`
+
+Uses [rot.js](https://github.com/ondras/rot.js) by Ondrej Zara. Some code stolen&adapted from [BotMos](https://botmos.org/).
