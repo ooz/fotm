@@ -43,7 +43,7 @@ export function createPlayer(state: State): State {
         y: y,
         icon: "@",
         color: "#fff",
-        points: 0,
+        points: 100,
     }
     return state
 }
@@ -68,7 +68,7 @@ export function createActors(state: State): State {
                 y: y,
                 icon: "?",
                 color: "#888",
-                points: 0
+                points: 100
             };
             actorId++;
         }

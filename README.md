@@ -7,17 +7,23 @@ GGJ2026 Theme "Mask". Covered [diversifiers](https://globalgamejam.org/global-ga
 * Cartridge Ready (Your game should be under 10 MB.)
 * Random encounter (Make the game around procedural generation.)
 
-## Design
+## Manual
 
-Possible TV messages:
+* Your start character/mask is the white `@`.
+* Move around with WASD or arrow keys.
+* Pickup one of the masks from the sides to follow the fashion dictated by the TV screen.
+* You lose HP, if you don't follow current fashion. If your HP reaches `0`, you lose.
+* Same applies to your contestants. You win, if you are the last to remain.
 
-* Be edgy! | Be yourself! | Be hip! --> Colors and characters with <10% occurence, gain points
-* Fade in the mainstream! | Strength in unity! --> Colors and characters with >80% occurence, gain points
-* We ❤️ Emojis! --> emoji characters gain points
-* FotM is nuclear (green) --> green color and nuclear emojis gain points
-* FotM is nature (green) --> green color and organic emojis gain points
-* FotM is love (red)
-* FotM is water (blue)
-* FotM is number
-* FotM is letter
-* FotM is symbol
+* If you want a faster/easier game, reduce the window size and reload.
+
+## Screenshots
+
+![Follow the Flavor of the Month!](screenshots/fotm.png)
+![You win!](screenshots/win.png)
+![Game over!](screenshots/game_over.png)
+
+## Creators
+
+* Oliver "oz" Z.
+* `gemini-cli`

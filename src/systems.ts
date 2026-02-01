@@ -87,7 +87,11 @@ function updateActorsFashion(state: State): State {
                 actor.icon = state.rng.getItem(NATURE);
                 break;
             case TV_MESSAGE.NUCLEAR:
-                actor.icon = state.rng.getItem(NUCLEAR);
+                if (state.rng.getUniform() > 0.5) {
+                    actor.icon = state.rng.getItem(NUCLEAR);
+                } else {
+                    actor.color = "#0f0";
+                }
                 break;
             case TV_MESSAGE.EDGY:
                 // Pick random properties to create noise/variety
@@ -191,7 +195,7 @@ function updatePoints(state: State): State {
                 if (NATURE.includes(actor.icon)) points = 1; else points = -1;
                 break;
             case TV_MESSAGE.NUCLEAR:
-                if (NUCLEAR.includes(actor.icon)) points = 1; else points = -1;
+                if (NUCLEAR.includes(actor.icon) || actor.color === "#0f0") points = 1; else points = -1;
                 break;
             case TV_MESSAGE.EDGY:
                 if ((iconCounts[actor.icon] || 0) / total < 0.10) points = 1; else points = -1;
@@ -207,7 +211,7 @@ function updatePoints(state: State): State {
             points = -Math.max(2, Math.floor(Math.abs(actor.points) * 0.01));
         }
         actor.points += points;
-        if (actor.points > 100) actor.points = 100;
+        if (actor.points > 200) actor.points = 200;
     }
 
     return state;
@@ -218,7 +222,7 @@ function updateActorLives(state: State): State {
 
     for (const actorId in state.actors) {
         const actor = state.actors[actorId];
-        if (actor.points <= -100) {
+        if (actor.points <= 0) {
             actorsToRemove.push(actorId);
         }
     }
@@ -232,7 +236,7 @@ function updateActorLives(state: State): State {
         delete state.actors[actorId];
     }
 
-    if (state.player && state.player.points <= -100) {
+    if (state.player && state.player.points <= 0) {
         const posKey = `${state.player.x},${state.player.y}`;
         if (state.positionToActorId[posKey] === state.player.id) {
             delete state.positionToActorId[posKey];

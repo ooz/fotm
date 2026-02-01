@@ -46,7 +46,7 @@ export async function draw(state: State) {
 
     // UI
     if (state.player) {
-        ROT_DISPLAY.drawText(0, 0, "%c{#ff0}%b{#888}Score: " + state.player.points + " Enemies: " + Object.keys(state.actors).length)
+        ROT_DISPLAY.drawText(0, 0, "%c{#ff0}%b{#888}HP: " + state.player.points + " Contestants: " + Object.keys(state.actors).length)
     }
 }
 

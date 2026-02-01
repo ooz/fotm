@@ -77,7 +77,7 @@ export function itemTypeToItem(state: State, type: ItemType): Item {
             }
         case ItemType.SYMBOL:
             return {
-                icon: state.rng.getItem(["!", "#", "$", "%", "="]),
+                icon: state.rng.getItem(["!", "#", "$", "%", "=", "?"]),
                 color: "#fff",
                 type: ItemType.SYMBOL
             }
