@@ -112,7 +112,11 @@ function updateTvMessage(state: State): State {
         state.tv.message = theme
         state.tv.messageStr = messageToString(state, theme)
 
-        tvUpdateCounter = state.rng.getItem([Math.ceil((state.width + state.height) * (2/3)), state.width + state.height, Math.ceil((state.width + state.height) * 1.5)])
+        if (theme === TV_MESSAGE.MAINSTREAM) {
+            tvUpdateCounter = state.rng.getItem([15, 20, 25])
+        } else {
+            tvUpdateCounter = state.rng.getItem([Math.ceil((state.width + state.height) * (2/3)), state.width + state.height, Math.ceil((state.width + state.height) * 1.5)])
+        }
     }
 
     tvUpdateCounter--;
