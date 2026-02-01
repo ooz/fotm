@@ -198,12 +198,12 @@ function updatePoints(state: State): State {
                 if (NUCLEAR.includes(actor.icon) || actor.color === "#0f0") points = 1; else points = -1;
                 break;
             case TV_MESSAGE.EDGY:
-                if ((iconCounts[actor.icon] || 0) / total < 0.10) points = 1; else points = -1;
+                if ((iconCounts[actor.icon] || 0) / total <= 0.10) points = 1; else points = -1;
                 break;
             case TV_MESSAGE.MAINSTREAM:
                 const iconPct = (iconCounts[actor.icon] || 0) / total;
                 const colorPct = (colorCounts[actor.color] || 0) / total;
-                if (iconPct > 0.90 || colorPct > 0.90) points = 1; else points = -1;
+                if (iconPct > 0.80 || colorPct > 0.80) points = 1; else points = -1;
                 break;
         }
 
