@@ -46,8 +46,8 @@ function updateActorsFashion(state: State): State {
     }
 
     for (const actor of actors) {
-        // Update ~5% of actors per turn
-        if (state.rng.getUniform() > 0.05) continue;
+        // Update ~2% of actors per turn
+        if (state.rng.getUniform() > 0.02) continue;
 
         // 20% chance to pick the "wrong" fashion (something random)
         if (state.rng.getUniform() < 0.2) {
@@ -204,9 +204,10 @@ function updatePoints(state: State): State {
         }
 
         if (points < 0) {
-            points = -Math.max(1, Math.floor(Math.abs(actor.points) * 0.01));
+            points = -Math.max(2, Math.floor(Math.abs(actor.points) * 0.01));
         }
         actor.points += points;
+        if (actor.points > 100) actor.points = 100;
     }
 
     return state;
@@ -245,8 +246,6 @@ function updateActorLives(state: State): State {
             state.tv.messageStr = WIN_MESSAGE;
         }
     }
-
-    console.log("Actors: " + Object.keys(state.actors).length)
 
     return state;
 }
