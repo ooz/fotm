@@ -1,15 +1,7 @@
+import { COLORFUL, COLORS, EMOJIS, LETTERS, NATURE, NUCLEAR, NUMBERS, SYMBOLS } from "./constants";
 import { ItemType, itemTypeToItem } from "./item";
 import { State } from "./state";
 import { messageToString, TV_MESSAGE, GAME_OVER_MESSAGE, WIN_MESSAGE } from "./tv";
-
-const EMOJIS = ["🫠", "👾", "🤘", "🥷", "🦉", "🐸", "🐢", "🌲", "🍩", "🚀", "🥋", "🎭", "💰", "☢️", "❤️"];
-const NATURE = ["🦉", "🐸", "🐢", "🌲"];
-const NUCLEAR = ["☢️"];
-const SYMBOLS = ["!", "#", "$", "%", "=", "?"];
-const LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-const NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-const COLORS = ["#fff", "#f00", "#0f0", "#00f", "#ff0", "#f0f", "#0ff", "#888"];
-const COLORFUL = ["#f00", "#0f0", "#00f", "#ff0", "#f0f", "#0ff"];
 
 export function updateSystemsPerTurn(state: State): State {
     state = updateTvMessage(state)

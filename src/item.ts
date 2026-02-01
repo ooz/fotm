@@ -1,4 +1,5 @@
 import { MAP_PADDING } from "./config";
+import { EMOJIS, ITEM_COLORS, LETTERS, NUMBERS, SYMBOLS } from "./constants";
 import { State } from "./state";
 
 export interface Item {
@@ -59,32 +60,32 @@ export function itemTypeToItem(state: State, type: ItemType): Item {
     switch (type) {
         case ItemType.EMOJI:
             return {
-                icon: state.rng.getItem(["🫠", "👾", "🤘", "🥷", "🦉", "🐸", "🐢", "🌲", "🍩", "🚀", "🥋", "🎭", "💰", "☢️", "❤️"]),
+                icon: state.rng.getItem(EMOJIS),
                 color: "#fff",
                 type: ItemType.EMOJI
             }
         case ItemType.LETTER:
             return {
-                icon: state.rng.getItem(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]),
+                icon: state.rng.getItem(LETTERS),
                 color: "#fff",
                 type: ItemType.LETTER
             }
         case ItemType.NUMBER:
             return {
-                icon: state.rng.getItem(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]),
+                icon: state.rng.getItem(NUMBERS),
                 color: "#fff",
                 type: ItemType.NUMBER
             }
         case ItemType.SYMBOL:
             return {
-                icon: state.rng.getItem(["!", "#", "$", "%", "=", "?"]),
+                icon: state.rng.getItem(SYMBOLS),
                 color: "#fff",
                 type: ItemType.SYMBOL
             }
         case ItemType.COLOR:
             return {
                 icon: "",
-                color: state.rng.getItem(["#fff", "#f00", "#0f0", "#00f", "#ff0", "#f0f", "#0ff"]),
+                color: state.rng.getItem(ITEM_COLORS),
                 type: ItemType.COLOR
             }
         default:
