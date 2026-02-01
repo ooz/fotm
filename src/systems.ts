@@ -203,6 +203,9 @@ function updatePoints(state: State): State {
                 break;
         }
 
+        if (points < 0) {
+            points = -Math.max(1, Math.floor(Math.abs(actor.points) * 0.01));
+        }
         actor.points += points;
     }
 
