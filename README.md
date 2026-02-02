@@ -10,7 +10,7 @@ GGJ2026 Theme "Mask". Covered [diversifiers](https://globalgamejam.org/global-ga
 ## Manual
 
 * Your start character/mask is the white `@`.
-* Move around with WASD or arrow keys.
+* Move around with WASD or arrow keys or wait in place with spacebar.
 * Pickup one of the masks from the sides to follow the fashion dictated by the TV screen.
 * You lose HP, if you don't follow current fashion. If your HP reaches `0`, you lose.
 * Same applies to your contestants. You win, if you are the last to remain.
